@@ -7,9 +7,19 @@ const RecordatorioTurno = () => {
   const [hora, setHora] = useState('');
   const [telefono, setTelefono] = useState('');
   const [mensajeEnviado, setMensajeEnviado] = useState(false);
+  const [mensajeError, setMensajeError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Verificar si algún campo está vacío
+    if (!nombre || !dia || !hora || !telefono) {
+      setMensajeError(true);
+      setTimeout(() => {
+        setMensajeError(false);
+      }, 3000);
+      return;
+    }
 
     const fecha = new Date(dia);
     const diaFormateado = String(fecha.getDate()).padStart(2, '0');
@@ -17,7 +27,7 @@ const RecordatorioTurno = () => {
     const anioFormateado = fecha.getFullYear();
     const fechaFormateada = `${diaFormateado}/${mesFormateado}/${anioFormateado}`;
 
-    const mensaje = `Psico. Zully Diaz: ${nombre}, te recordamos tu turno el ${fechaFormateada} a las ${hora} hs.`;
+    const mensaje = `Psico. Zully Diaz: '${nombre}', te recordamos tu turno el ${fechaFormateada} a las ${hora} hs. 'Saludos!'`;
     const numeroWhatsApp = `549${telefono}`;
     const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
@@ -41,7 +51,7 @@ const RecordatorioTurno = () => {
         <h2 className="text-gray-800 text-2xl font-bold mb-6 text-center">Recordatorio de Turno</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-800">Nombre del Paciente</label>
+            <label className="block text-sm font-medium text-gray-900">Nombre del Paciente</label>
             <input
               type="text"
               value={nombre}
@@ -83,15 +93,20 @@ const RecordatorioTurno = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-green-600 transition"
+            className="w-full bg-green-600 text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-green-900 transition"
           >
             <FaWhatsapp className="mr-2 font-bold" />
             Enviar Recordatorio
           </button>
         </form>
         {mensajeEnviado && (
-          <div className="mt-4 p-2 bg-green-100 text-green-700 text-center rounded">
+          <div className="mt-4 p-2 bg-green-200 text-green-700 text-center rounded">
             Mensaje enviado
+          </div>
+        )}
+        {mensajeError && (
+          <div className="mt-4 p-2 bg-red-200 text-red-700 text-center rounded">
+            No puede enviar el mensaje vacío
           </div>
         )}
       </div>
@@ -100,4 +115,3 @@ const RecordatorioTurno = () => {
 };
 
 export default RecordatorioTurno;
-
