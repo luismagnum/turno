@@ -7,26 +7,28 @@ const RecordatorioTurno = () => {
   const [hora, setHora] = useState('');
   const [telefono, setTelefono] = useState('');
   const [mensajeEnviado, setMensajeEnviado] = useState(false);
-  const [mensajeError, setMensajeError] = useState(false);
+  const [mensajeError, setMensajeError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!nombre || !dia || !hora || !telefono) {
-      setMensajeError(true);
+      setMensajeError('No puede enviar el mensaje vacío');
       setTimeout(() => {
-        setMensajeError(false);
+        setMensajeError('');
       }, 3000);
       return;
     }
 
-    const fecha = new Date(dia + 'T00:00:00');a
+    const [anio, mes, diaDelMes] = dia.split('-').map(Number);
+    const fecha = new Date(anio, mes - 1, diaDelMes);
+
     const diaFormateado = String(fecha.getDate()).padStart(2, '0');
     const mesFormateado = String(fecha.getMonth() + 1).padStart(2, '0');
     const anioFormateado = fecha.getFullYear();
     const fechaFormateada = `${diaFormateado}/${mesFormateado}/${anioFormateado}`;
 
-    const mensaje = `Psico. Zully Diaz: '${nombre}', te recordamos tu turno el ${fechaFormateada} a las ${hora} hs. 'Saludos!'`;
+    const mensaje = `Psico. Zully Diaz: ${nombre}, te recordamos tu turno el ${fechaFormateada} a las ${hora} hs. ¡Saludos!`;
     const numeroWhatsApp = `549${telefono}`;
     const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
@@ -105,7 +107,7 @@ const RecordatorioTurno = () => {
         )}
         {mensajeError && (
           <div className="mt-4 p-2 bg-red-200 text-red-700 text-center rounded">
-            No puede enviar el mensaje vacío
+            {mensajeError}
           </div>
         )}
       </div>
