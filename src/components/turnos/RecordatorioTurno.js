@@ -12,7 +12,6 @@ const RecordatorioTurno = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Verificar si algún campo está vacío
     if (!nombre || !dia || !hora || !telefono) {
       setMensajeError(true);
       setTimeout(() => {
@@ -21,7 +20,7 @@ const RecordatorioTurno = () => {
       return;
     }
 
-    const fecha = new Date(dia);
+    const fecha = new Date(dia + 'T00:00:00');a
     const diaFormateado = String(fecha.getDate()).padStart(2, '0');
     const mesFormateado = String(fecha.getMonth() + 1).padStart(2, '0');
     const anioFormateado = fecha.getFullYear();
@@ -93,7 +92,7 @@ const RecordatorioTurno = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-green-900 transition"
+            className="w-full bg-green-600 text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-green-800 transition"
           >
             <FaWhatsapp className="mr-2 font-bold" />
             Enviar Recordatorio
