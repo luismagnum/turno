@@ -58,8 +58,8 @@ const RecordatorioTurno = () => {
       className='flex text-center mx-auto'
       />
     </span>
-        <h1 className="text-gray-800 text-xl font-bold mb-4 text-center">Psico. Zully Diaz</h1>
-        <h2 className="text-gray-800 text-2xl font-bold mb-6 text-center">Recordatorio de Turno</h2>
+        <h1 className="text-gray-800 text-xl font-bold mb-4 text-center">Psico. Zully C. Diaz</h1>
+        <h2 className="text-gray-800 text-xl md:text-2xl font-bold mb-6 text-center">Recordatorio de Turnos</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-900">Nombre del Paciente</label>
