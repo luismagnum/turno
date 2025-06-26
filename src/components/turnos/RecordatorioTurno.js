@@ -29,7 +29,7 @@ const RecordatorioTurno = () => {
     const anioFormateado = fecha.getFullYear();
     const fechaFormateada = `${diaFormateado}/${mesFormateado}/${anioFormateado}`;
 
-    const mensaje = `Psico. Zully Diaz: ${nombre}, te recordamos tu turno el ${fechaFormateada} a las ${hora} hs. Por favor se ruega confirmar, ya que hay lista de espera.Mil Gracias!`;
+    const mensaje = `Psico. Zully Diaz: ${nombre}, te recordamos tu turno el ${fechaFormateada} a las ${hora} hs. Valor actual de la sesion $25000. Por favor se ruega confirmar, ya que hay lista de espera.Mil Gracias!`;
     const numeroWhatsApp = `549${telefono}`;
     const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
